@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Media model</title>
+    <link rel="stylesheet" href="/css/master.css">
+    <script src="./script.js" charset="utf-8"></script>
+    <script>
+      var controller = new Media({
+        mobile: '(max-width : 699px)',
+        tablet: '(min-width : 700px) and (max-width : 992px)',
+        desktop: '(min-width : 993px) and (max-width : 1000px)',
+        orientation: '((min-width : 1001px))'
+      },
+      function(e) {
+        if(e.type == 'orientation')console.log(e);
+      }
+    )
+    </script>
+  </head>
+  <body>
+    <div class="options">
+
+    </div>
+    <div class="state">
+
+    </div>
+  </body>
+</html>
