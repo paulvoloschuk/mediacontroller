@@ -1,0 +1,52 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background: rgb(178, 171, 190);
+  font: 12px Helvetica;
+  color: white;
+}
+.wrapper {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1000px;
+}
+h1 {
+  padding: .5em;
+  background: rgb(128, 55, 116);
+}
+.flex {
+  display: flex;
+}
+.options, .state{
+  flex: 100px 1 1;
+  background: rgba(0,0,0,.3);
+  margin: .5em;
+  padding: .5em 0;
+  border-radius: 2px;
+}
+h2{
+  text-align: center;
+  background: rgb(104, 55, 128);
+  padding: .5em 0;
+}
+pre{
+  overflow: auto;
+}
+.content{
+  padding: .5em 1em;
+}
+.description{
+  color: black;
+  line-height: 1.5em;
+}
+.description span {
+  background: rgb(106, 62, 158);
+  color: white;
+  padding: .1em .4em;
+  border-radius: 4px;
+}
+@media screen and (max-width:750px) {
+  .flex {
+    display: block;
+  }
+}

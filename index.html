@@ -3,27 +3,64 @@
   <head>
     <meta charset="utf-8">
     <title>Media model</title>
-    <link rel="stylesheet" href="/css/master.css">
+    <link rel="stylesheet" href="./style.css">
     <script src="./script.js" charset="utf-8"></script>
     <script>
-      var controller = new Media({
-        mobile: '(max-width : 699px)',
-        tablet: '(min-width : 700px) and (max-width : 992px)',
-        desktop: '(min-width : 993px) and (max-width : 1000px)',
-        orientation: '((min-width : 1001px))'
-      },
-      function(e) {
-        if(e.type == 'orientation')console.log(e);
+      window.onload = function() {
+        var options = {
+          mobile: '(max-width : 699px)',
+          tablet: '(min-width : 700px) and (max-width : 992px)',
+          desktop: '(min-width : 993px) and (max-width : 1920px)',
+          uhd: '((min-width : 1921px))'
+        };
+        var callback = function(e) {
+          console.log(e, controller);
+          var state = document.getElementById('state');
+var stateString = `{
+  device: ${controller.devices.current},
+  orientation: ${controller.orientation.current}
+}`;
+          state.innerHTML = stateString;
+        }
+        var controller = new Media(options, callback);
+        callback('Initalization');
       }
-    )
     </script>
   </head>
   <body>
-    <div class="options">
-
+    <h1>
+      <div class="wrapper">
+        Media model
+      </div>
+    </h1>
+    <div class="wrapper flex">
+      <div class="options">
+        <h2>Options</h2>
+<pre class="content">
+  var options = {
+    mobile: '(max-width : 699px)',
+    tablet: '(min-width : 700px) and (max-width : 992px)',
+    desktop: '(min-width : 993px) and (max-width : 1920px)',
+    uhd: '((min-width : 1921px))'
+  };
+</pre>
+      </div>
+      <div class="state">
+        <h2>Current state</h2>
+<pre class="content" id="state">
+asdad
+</pre>
+      </div>
     </div>
-    <div class="state">
-
+    <div class="wrapper description">
+      <ol>
+        <li>We can configure model on construct.</li>
+        <li>We use singeleton.</li>
+        <li>Expression <span>media.device.[custom device]</span> or <span>media.orientation.[landscape/portrait].</span> will return <span>Boolean</span></li>
+        <li>Expression <span>media.[device/orientation].current</span> containing current state.</li>
+        <li>Model changes on screen resize and fires <span>CustomEvent</span> into <span>callback</span>.</li>
+      </ol>
+      You can open console for more info.
     </div>
   </body>
 </html>
