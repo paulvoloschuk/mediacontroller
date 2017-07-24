@@ -68,12 +68,27 @@ function Media(deviceConditions = {}, callback = false) {
     }())
   }
   var matches = {
-    devices: Object.keys(deviceConditions).reduce(function(result, conditionName){
-      result[conditionName] = window.matchMedia(deviceConditions[conditionName]);
-      result[conditionName].type = 'devices';
-      result[conditionName].onchange = _build.bind(self);
+    devices: (function(){
+      var result = {},
+          keys = Object.keys(deviceConditions),
+          key,
+          queryString,
+          min,
+          max;
+      for (var i = 0; i < keys.length + 1; i++) {
+        key = keys[i] || 'nosupport';
+        // Query string
+        min = (i > 0 && i <= keys.length) ? `(min-width: ${deviceConditions[keys[i - 1]]}px)` : '';
+        max = (i < keys.length) ? `(max-width: ${deviceConditions[keys[i]] - 1}px)` : '';
+        queryString = (min !== '' && max !== '') ? Array.from([min, max]).join(' and ') : min + max;
+        // Making matchMedias
+        result[key] = window.matchMedia(queryString);
+        result[key].type = 'devices';
+        result[key].onchange = _build.bind(self);
+      }
+      console.log(result);
       return result;
-    }, {}),
+    })(),
     orientation: {
       landscape: orientationInit('landscape'),
       portrait: orientationInit('portrait')

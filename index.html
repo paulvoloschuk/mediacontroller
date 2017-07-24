@@ -8,11 +8,9 @@
     <script>
       window.onload = function() {
         var options = {
-          mobile: '(max-width : 699px)',
-          tablet: '(min-width : 700px) and (max-width : 992px)',
-          desktop: '(min-width : 993px) and (max-width : 1920px)',
-          uhd: '((min-width : 1921px))'
-        };
+          mobile:700,
+          tablet:960
+        }
         var callback = function(e) {
           console.log(e, controller);
           var state = document.getElementById('state');
@@ -38,11 +36,9 @@ var stateString = `{
         <h2>Options</h2>
 <pre class="content">
   var options = {
-    mobile: '(max-width : 699px)',
-    tablet: '(min-width : 700px) and (max-width : 992px)',
-    desktop: '(min-width : 993px) and (max-width : 1920px)',
-    uhd: '((min-width : 1921px))'
-  };
+    mobile:700,
+    tablet:960
+  }
 </pre>
       </div>
       <div class="state">
