@@ -13,19 +13,6 @@ function Media(deviceConditions = {}, callback = false) {
   // Bulding condition variables
   var _build = function(e) {
     if (e && e.matches && e.target.type || !Media._instance) {
-      var selectCurrent = function(object) {
-        var coincidence = Object.keys(object).filter(function(key) {
-          return object[key]
-        })
-
-        // If something goes wrong
-        if (coincidence.length > 1)
-          throw new TypeError('Conditions musn\'t cross each other');
-        if (coincidence.length == 0)
-          throw new TypeError('Condition couldn\'t be detected');
-
-        return coincidence[0];
-      }
 
       // Bulding
       if (e && e.target.type) var oldValue = self[e.target.type].current;
@@ -35,6 +22,19 @@ function Media(deviceConditions = {}, callback = false) {
           return result;
         }, {})
       }
+
+      var selectCurrent = function(object) {
+        var coincidence = Object.keys(object).filter(function(key) {
+          return object[key]
+        })
+        // If something goes wrong
+        if (coincidence.length > 1)
+          throw new TypeError('Conditions musn\'t cross each other');
+        if (coincidence.length == 0)
+          throw new TypeError('Condition couldn\'t be detected');
+        return coincidence[0];
+      }
+      
       Array.from(['devices', 'orientation']).forEach(function(prop) {
         self[prop] = setUpProps(matches[prop]);
         self[prop].current = selectCurrent(self[prop]);
